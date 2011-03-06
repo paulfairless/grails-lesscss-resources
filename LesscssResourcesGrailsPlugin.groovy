@@ -4,7 +4,8 @@ class LesscssResourcesGrailsPlugin {
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = "1.3.7 > *"
     // the other plugins this plugin depends on
-    def dependsOn = [:]
+    def dependsOn = [resources:'1.0-RC1b > *']
+    def loadAfter = ['resources']
     // resources that are excluded from plugin packaging
     def pluginExcludes = [
             "grails-app/views/error.gsp"
