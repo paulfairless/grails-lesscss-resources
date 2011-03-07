@@ -2,7 +2,7 @@ class LesscssResourcesGrailsPlugin {
     // the plugin version
     def version = "0.1"
     // the version or versions of Grails the plugin is designed for
-    def grailsVersion = "1.3.7 > *"
+    def grailsVersion = "1.3.5 > *"
     // the other plugins this plugin depends on
     def dependsOn = [resources:'1.0-RC1b > *']
     def loadAfter = ['resources']
@@ -11,16 +11,15 @@ class LesscssResourcesGrailsPlugin {
             "grails-app/views/error.gsp"
     ]
 
-    // TODO Fill in these fields
-    def author = "Your name"
+    def author = "Paul Fairless"
     def authorEmail = ""
-    def title = "Plugin summary/headline"
+    def title = "Less CSS Resources"
     def description = '''\\
-Brief description of the plugin.
+This plugin if to support server-side compliation of .less CSS files to their .css counterparts.
 '''
 
     // URL to the plugin's documentation
-    def documentation = "http://grails.org/plugin/lesscss-resources"
+    def documentation = "https://github.com/paulfairless/grails-lesscss-resources"
 
     def doWithWebDescriptor = { xml ->
         // TODO Implement additions to web.xml (optional), this event occurs before 
