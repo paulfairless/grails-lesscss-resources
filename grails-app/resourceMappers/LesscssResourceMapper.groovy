@@ -24,8 +24,9 @@ class LesscssResourceMapper {
                 // Update mapping entry
                 // We need to reference the new css file from now on
                 resource.processedFile = target
+                // Not sure if i really need these
                 resource.sourceUrlExtension = 'css'
-                resource.actualUrl = resource.originalUrl.replace('.less', '.css')
+                resource.actualUrl = resource.originalUrl.replace('.less', '_less.css')
                 resource.contentType = 'text/css'
             } catch (LessException e) {
                 log.error("error compiling less file: ${input}")
