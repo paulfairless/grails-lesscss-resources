@@ -4,7 +4,7 @@
 
 <h2>Usage</h2>
 <pre><code>'less' {
-        resource url:'less/test.less',attrs:[type:'css'], bundle:'bundle_less'
+        resource url:'less/test.less',attrs:[rel: "stylesheet/less", type:'css'], bundle:'bundle_less'
         resource url:'css/normal.css'
         resource url:'css/normal2.css'
     }
