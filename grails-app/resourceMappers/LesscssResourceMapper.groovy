@@ -1,45 +1,36 @@
 import com.asual.lesscss.LessEngine
+import com.asual.lesscss.LessException
 
 class LesscssResourceMapper {
-    def priority = 10
+    def priority = 10 // need to run early so that we don't miss out on all the good stuff
 
     static defaultExcludes = ['**/*.js','**/*.png','**/*.gif','**/*.jpg','**/*.jpeg','**/*.gz','**/*.zip']
 
     def map(resource, config){
-        def f = resource.processedFile
-        def target
+        File f = resource.processedFile
+        File target
 
         def name = f.name
         if (name.toLowerCase().endsWith('.less')) {
             LessEngine engine = new LessEngine()
-            def input = f
-            target = getOutputFile(f)
-//            target.text=''
-//            if (!target.exists()) {
-               // if (log.debugEnabled) {
-                    log.error "Compiling LESS file [${input}] into [${target}]"
-                //}
+            File input = f
+            target = new File(input.getAbsolutePath().replace('.less', '_less.css'))
+
+            if (log.debugEnabled) {
+                log.debug "Compiling LESS file [${input}] into [${target}]"
+            }
+            try {
                 engine.compile input, target
-
-//            } else {
-                //if (log.debugEnabled) {
-//                    log.error "Skipping rename of less file $f as css file exists"
-               // }
-//            }
-            // Update mapping entry
-            // NOTE: we don't change actualUrl because we want to link to the xxxx.css file
-            // but transparently serve up the xxx.css.gz file
-            resource.processedFile = target
-            resource.sourceUrlExtension = 'css'
-            resource.actualUrl = resource.originalUrl.replace('.less', '.css')
-            resource.contentType = 'text/css'
-
+                // Update mapping entry
+                // We need to reference the new css file from now on
+                resource.processedFile = target
+                resource.sourceUrlExtension = 'css'
+                resource.actualUrl = resource.originalUrl.replace('.less', '.css')
+                resource.contentType = 'text/css'
+            } catch (LessException e) {
+                log.error("error compiling less file: ${input}")
+                e.printStackTrace()
+            }
         }
-    }
-
-
-    private File getOutputFile(File input) {
-        def inputStr = input as String
-        new File(inputStr.substring(0, inputStr.size() - '.less'.length()) + ".css")
     }
 }
