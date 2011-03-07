@@ -28,6 +28,7 @@ class LesscssResourceMapper {
                 resource.sourceUrlExtension = 'css'
                 resource.actualUrl = resource.originalUrl.replace('.less', '_less.css')
                 resource.contentType = 'text/css'
+                resource.tagAttributes.rel = 'stylesheet'
             } catch (LessException e) {
                 log.error("error compiling less file: ${input}")
                 e.printStackTrace()
