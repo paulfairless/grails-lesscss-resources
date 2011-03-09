@@ -5,7 +5,8 @@ LESS extends CSS with dynamic behavior such as variables, mixins, operations and
 
 
 ##Installation##
-<pre><code>grails install-plugin lesscss-resources</code></pre>
+coming soon ...
+<!--<pre><code>grails install-plugin lesscss-resources</code></pre>-->
 
 ##Usage##
 An Example of using both .less and .css files together in a bundle
