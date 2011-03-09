@@ -9,18 +9,18 @@ LESS extends CSS with dynamic behavior such as variables, mixins, operations and
 
 ##Usage##
 An Example of using both .less and .css files together in a bundle
-<pre><code>'less' {
-        resource url:'less/test.less',attrs:[rel: "stylesheet/less", type:'css'], bundle:'bundle_less'
+<pre><code>'style' {
+        resource url:'less/test.less',attrs:[rel: "stylesheet/less", type:'css'], bundle:'bundle_style'
         resource url:'css/normal.css'
         resource url:'css/normal2.css'
     }
 </code></pre>
 ###Required Settings for LESS###
 <ul>
-<li>*url*: The location of the .less file</li>
-<li>*attrs[rel]*: should be set to stylesheet/less for compatibility reasons</li>
-<li>*attrs[type]*: must be set to css for resources to process</li>
-<li>*bundle*: Must be set as will not default correctly. To add to default bundle use 'bundle_<module name>'</li>
+<li><b>url</b>: The location of the .less file</li>
+<li><b>attrs[rel]</b>: should be set to stylesheet/less for compatibility reasons</li>
+<li><b>attrs[type]</b>: must be set to css for resources to process</li>
+<li><b>bundle</b>: Must be set as will not default correctly. To add to default bundle use 'bundle_<module name>'</li>
 </ul>
 
 See the <a href="http://www.grails.org/plugin/resources">Resources plugin</a> for more details on available configurations
