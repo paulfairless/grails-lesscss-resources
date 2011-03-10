@@ -1,5 +1,5 @@
 #less CSS Resource plugin#
-This plugin is designed to optimise the use of <a href="http://www.lesscss.org">.less</a> css files. The Processing will compile specified .less files into their .css counterprt, and place the css into the processing chain to be available to the other resource plugin features. The plugin uses the <a href="http://www.asual.com/lesscss/">Asual Less Engine</a> to compile the .less files using Mozilla Rhino.
+This plugin is designed to optimise the use of <a href="http://www.lesscss.org">.less</a> css files. The Processing will compile specified .less files into their .css counterprt, and place the css into the processing chain to be available to the other resource plugin features. The plugin uses the <a href="http://www.asual.com/lesscss/">Asual Less Engine</a> to compile the .less files using Mozilla Rhino. The plugin uses the <a href="http://www.grails.org/plugin/resources">Resources plugin</a> and plays nicely with both the zipped and cached resources plugins.
 
 LESS extends CSS with dynamic behavior such as variables, mixins, operations and functions. <a href="http://www.lesscss.org">Read more</a>
 
