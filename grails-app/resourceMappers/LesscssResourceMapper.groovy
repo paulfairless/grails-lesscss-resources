@@ -5,34 +5,38 @@ class LesscssResourceMapper {
     def priority = 10 // need to run early so that we don't miss out on all the good stuff
 
     static defaultExcludes = ['**/*.js','**/*.png','**/*.gif','**/*.jpg','**/*.jpeg','**/*.gz','**/*.zip']
+    static String LESS_FILE_EXTENSION = '.less'
 
     def map(resource, config){
-        File f = resource.processedFile
+        File originalFile = resource.processedFile
         File target
 
-        def name = f.name
-        if (name.toLowerCase().endsWith('.less')) {
+        if (originalFile.name.toLowerCase().endsWith(LESS_FILE_EXTENSION)) {
             LessEngine engine = new LessEngine()
-            File input = f
-            target = new File(input.getAbsolutePath().replace('.less', '_less.css'))
+            File input = originalFile
+            target = new File(generateCompiledFileFromOriginal(originalFile.absolutePath))
 
             if (log.debugEnabled) {
-                log.debug "Compiling LESS file [${input}] into [${target}]"
+                log.debug "Compiling LESS file [${originalFile}] into [${target}]"
             }
             try {
-                engine.compile input, target
+                engine.compile originalFile, target
                 // Update mapping entry
                 // We need to reference the new css file from now on
                 resource.processedFile = target
                 // Not sure if i really need these
                 resource.sourceUrlExtension = 'css'
-                resource.actualUrl = resource.originalUrl.replace('.less', '_less.css')
+                resource.actualUrl = generateCompiledFileFromOriginal(resource.originalUrl)
                 resource.contentType = 'text/css'
                 resource.tagAttributes.rel = 'stylesheet'
             } catch (LessException e) {
-                log.error("error compiling less file: ${input}")
+                log.error("error compiling less file: ${originalFile}")
                 e.printStackTrace()
             }
         }
+    }
+
+    private String generateCompiledFileFromOriginal(String original) {
+         original.replace('.', '_')+".css"
     }
 }
