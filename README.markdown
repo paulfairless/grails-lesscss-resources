@@ -31,3 +31,7 @@ See the <a href="http://www.grails.org/plugin/resources">Resources plugin</a> fo
     <li>Must specify the default bundle manually as this is calculated based on file extension by default.</li>
     <li>When debug is switched on there is currently no way to fall back to the standard LESS javascript support. The less files will be rendered unprocessed</li>
 </ul>
+
+##Special Thanks##
+To David Marquis for his grails-lesscss plugin, which was the inspiration  for this resources based version.
+The guys at <a href="http://www.asual.com/">Asual<a> who created the lesscss complier, with does all the heavy lifting.
