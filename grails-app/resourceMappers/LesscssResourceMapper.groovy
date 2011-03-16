@@ -37,6 +37,6 @@ class LesscssResourceMapper {
     }
 
     private String generateCompiledFileFromOriginal(String original) {
-         original.replace('.', '_')+".css"
+         original.replaceAll(/(?i)\.less/, '_less.css')
     }
 }

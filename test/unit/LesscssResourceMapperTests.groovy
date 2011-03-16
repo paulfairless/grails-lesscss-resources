@@ -38,7 +38,7 @@ class LesscssResourceMapperTests extends GroovyTestCase{
     @Test
     void testMapperHandlesUpperCaseFileExtension() {
 
-        def targetFile = mock(File, constructor('/var/file/file_LESS.css'))
+        def targetFile = mock(File, constructor('/var/file/file_less.css'))
 
         def processedFile = mock(File)
         processedFile.getName().returns('file.LESS').stub()
@@ -51,7 +51,7 @@ class LesscssResourceMapperTests extends GroovyTestCase{
         def config = [:]
         play {
              mapper.map (resource, config)
-            assertEquals 'file_LESS.css', resource.actualUrl
+            assertEquals 'file_less.css', resource.actualUrl
             assertEquals 'css', resource.sourceUrlExtension
             assertEquals 'stylesheet', resource.tagAttributes.rel
             assertEquals 'text/css', resource.contentType
@@ -90,6 +90,14 @@ class LesscssResourceMapperTests extends GroovyTestCase{
             assertEquals '', resource.contentType
         }
 
+    }
+
+    @Test
+    void testGeneratedFilename() {
+        assertEquals 'foo/bar_less.css', mapper.generateCompiledFileFromOriginal('foo/bar.less')
+        assertEquals 'foo/bar_less.css', mapper.generateCompiledFileFromOriginal('foo/bar.LESS')
+        assertEquals 'foo/./bar_less.css', mapper.generateCompiledFileFromOriginal('foo/./bar.less')
+        assertEquals 'foo/less/bar_less.css', mapper.generateCompiledFileFromOriginal('foo/less/bar.less')
     }
 
 }
