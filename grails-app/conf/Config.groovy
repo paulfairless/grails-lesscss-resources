@@ -22,3 +22,10 @@ log4j = {
 
     warn   'org.mortbay.log'
 }
+
+grails.resources.modules = {
+
+    'less' {
+        resource url:'less/test.less',attrs:[rel: "stylesheet/less", type:'css'], bundle:'bundle_less'
+    }
+}

@@ -26,7 +26,14 @@ grails.project.dependency.resolution = {
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
         build 'rhino:js:1.7R2'
-        test 'org.gmock:gmock:0.8.0'
+        test ('org.gmock:gmock:0.8.0') {
+            export = false
+        }
+
+        test("org.seleniumhq.selenium:selenium-firefox-driver:2.0a7") {
+            exclude 'selenium-server'
+            export = false
+        }
         // runtime 'mysql:mysql-connector-java:5.1.13'
     }
 }
