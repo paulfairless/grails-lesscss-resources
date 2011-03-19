@@ -3,6 +3,11 @@ import org.junit.Test
 import grails.test.GrailsUnitTestCase
 import com.asual.lesscss.LessEngine
 
+/**
+ * @author Paul Fairless
+ *
+ */
+
 @WithGMock
 class LesscssResourceMapperTests extends GroovyTestCase{
 

@@ -1,6 +1,12 @@
 import com.asual.lesscss.LessEngine
 import com.asual.lesscss.LessException
 
+/**
+ * @author Paul Fairless
+ *
+ * Mapping file to compile .less files into .css files
+ */
+
 class LesscssResourceMapper {
     def priority = 10 // need to run early so that we don't miss out on all the good stuff
 

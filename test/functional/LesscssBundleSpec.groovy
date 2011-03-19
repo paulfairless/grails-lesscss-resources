@@ -1,8 +1,8 @@
 import grails.plugin.geb.GebSpec
+
 /**
- * User: Paul Fairless
- * Date: 16/03/2011
- * Time: 22:19
+ * @author Paul Fairless
+ *
  */
 
 class LesscssBundleSpec extends GebSpec {
