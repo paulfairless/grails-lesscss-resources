@@ -1,5 +1,6 @@
 import com.asual.lesscss.LessEngine
 import com.asual.lesscss.LessException
+import org.grails.plugin.resource.mapper.MapperPhase
 
 /**
  * @author Paul Fairless
@@ -8,7 +9,7 @@ import com.asual.lesscss.LessException
  */
 
 class LesscssResourceMapper {
-    def priority = 10 // need to run early so that we don't miss out on all the good stuff
+    def phase = MapperPhase.GENERATION // need to run early so that we don't miss out on all the good stuff
 
     static defaultExcludes = ['**/*.js','**/*.png','**/*.gif','**/*.jpg','**/*.jpeg','**/*.gz','**/*.zip']
     static String LESS_FILE_EXTENSION = '.less'

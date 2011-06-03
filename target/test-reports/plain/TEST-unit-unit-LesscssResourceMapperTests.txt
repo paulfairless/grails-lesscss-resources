@@ -1,0 +1,25 @@
+Testsuite: LesscssResourceMapperTests
+Tests run: 6, Failures: 0, Errors: 0, Time elapsed: 1.105 sec
+------------- Standard Output ---------------
+--Output from testMapperGeneratesCssFromLessResource--
+--Output from testMapperHandlesUpperCaseFileExtension--
+--Output from testMapperRunsEarlyInProcessingPipeline--
+--Output from testMapperExcludesAllButCSS--
+--Output from testMapperOnlyProcessesLessFiles--
+--Output from testGeneratedFilename--
+------------- ---------------- ---------------
+------------- Standard Error -----------------
+--Output from testMapperGeneratesCssFromLessResource--
+--Output from testMapperHandlesUpperCaseFileExtension--
+--Output from testMapperRunsEarlyInProcessingPipeline--
+--Output from testMapperExcludesAllButCSS--
+--Output from testMapperOnlyProcessesLessFiles--
+--Output from testGeneratedFilename--
+------------- ---------------- ---------------
+
+Testcase: testMapperGeneratesCssFromLessResource took 1 sec
+Testcase: testMapperHandlesUpperCaseFileExtension took 0.041 sec
+Testcase: testMapperRunsEarlyInProcessingPipeline took 0.002 sec
+Testcase: testMapperExcludesAllButCSS took 0.005 sec
+Testcase: testMapperOnlyProcessesLessFiles took 0.022 sec
+Testcase: testGeneratedFilename took 0.003 sec

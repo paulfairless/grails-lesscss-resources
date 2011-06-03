@@ -1,0 +1,10 @@
+Testsuite: LesscssBundleSpec
+Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 7.755 sec
+------------- Standard Output ---------------
+--Output from check lesscss rules rendered--
+------------- ---------------- ---------------
+------------- Standard Error -----------------
+--Output from check lesscss rules rendered--
+------------- ---------------- ---------------
+
+Testcase: check lesscss rules rendered took 7.742 sec
