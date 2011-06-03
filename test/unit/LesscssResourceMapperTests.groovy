@@ -2,6 +2,7 @@ import org.gmock.WithGMock
 import org.junit.Test
 import grails.test.GrailsUnitTestCase
 import com.asual.lesscss.LessEngine
+import org.grails.plugin.resource.mapper.MapperPhase
 
 /**
  * @author Paul Fairless
@@ -66,7 +67,7 @@ class LesscssResourceMapperTests extends GroovyTestCase{
 
     @Test
     void testMapperRunsEarlyInProcessingPipeline(){
-       assertEquals 10, mapper.priority
+       assertEquals MapperPhase.GENERATION , mapper.phase
     }
 
     @Test
