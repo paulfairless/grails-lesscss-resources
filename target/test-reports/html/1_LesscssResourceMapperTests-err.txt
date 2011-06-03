@@ -1,7 +1,0 @@
---Output from testMapperGeneratesCssFromLessResource--
---Output from testMapperHandlesUpperCaseFileExtension--
---Output from testMapperRunsEarlyInProcessingPipeline--
---Output from testMapperExcludesAllButCSS--
---Output from testMapperOnlyProcessesLessFiles--
---Output from testGeneratedFilename--
-

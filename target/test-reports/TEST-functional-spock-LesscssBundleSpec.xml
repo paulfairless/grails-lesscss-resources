@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="0" hostname="Paul-Fairlesss-MacBook-Air.local" name="LesscssBundleSpec" tests="1" time="7.755" timestamp="2011-06-03T08:29:12">
-  <properties />
-  <testcase classname="LesscssBundleSpec" name="check lesscss rules rendered" time="7.742" />
-  <system-out><![CDATA[--Output from check lesscss rules rendered--
-]]></system-out>
-  <system-err><![CDATA[--Output from check lesscss rules rendered--
-]]></system-err>
-</testsuite>
