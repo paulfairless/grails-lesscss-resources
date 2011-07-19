@@ -22,10 +22,12 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
+        mavenRepo "http://www.asual.com/maven/content/groups/public"
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
         runtime 'rhino:js:1.7R2'
+        runtime 'com.asual.lesscss:lesscss-engine:1.1.3'
         test ('org.gmock:gmock:0.8.0') {
             export = false
         }
