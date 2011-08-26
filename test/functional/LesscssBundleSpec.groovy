@@ -1,5 +1,4 @@
-import grails.plugin.geb.GebSpec
-
+import geb.spock.GebSpec
 /**
  * @author Paul Fairless
  *
@@ -11,9 +10,9 @@ class LesscssBundleSpec extends GebSpec {
     }
     def "check lesscss rules rendered"(){
         when:
-            go('/lesscss-resources')
+            go('http://localhost:8080/lesscss-resources')
         then:
         $('h1').text() == 'Less Test'
-        js.exec("""return jQuery('h1').css('color');""") == 'rgb(34, 34, 251)'
+        $('h1').jquery.css('color') == 'rgb(34, 34, 251)'
     }
 }
