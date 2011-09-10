@@ -15,6 +15,13 @@ An Example of using both .less and .css files together in a bundle
         resource url:'css/normal2.css'
     }
 </code></pre>
+
+#Import#
+LESS supports importing of other less/css files. This is supported in lesscss-resources
+<pre><code>@import 'imported_style.less';
+</code></pre>
+It is notable that the files to be imported are not part of the resources bundle, so any changes will not trigger a rebuild of the resource.
+
 ###Required Settings for LESS###
 <ul>
 <li><b>url</b>: The location of the .less file</li>

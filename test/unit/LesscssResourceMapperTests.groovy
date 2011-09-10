@@ -20,20 +20,25 @@ class LesscssResourceMapperTests extends GroovyTestCase{
 
     @Test
     void testMapperGeneratesCssFromLessResource() {
-
+        String fileName = "file.less"
         def targetFile = mock(File, constructor('/var/file/file_less.css'))
 
+        def originalFile = mock(File)
         def processedFile = mock(File)
-        processedFile.getName().returns('file.less').stub()
-        processedFile.getAbsolutePath().returns('/var/file/file.less').stub()
+        processedFile.getName().returns(fileName).stub()
+        processedFile.getAbsolutePath().returns('/var/file/'+fileName).stub()
 
         def lessEngine = mock(LessEngine, constructor())
-        lessEngine.compile(processedFile, targetFile).once()
+        lessEngine.compile(originalFile, targetFile).once()
 
-        def resource = [processedFile:processedFile, actualUrl:'', sourceUrlExtension:'less', contentType:'', originalUrl:'file.less', tagAttributes:[rel:'stylesheet/less']]
+        def resource = [processedFile:processedFile, sourceUrl:fileName, actualUrl:'', sourceUrlExtension:'less', contentType:'', originalUrl:'file.less', tagAttributes:[rel:'stylesheet/less']]
         def config = [:]
+
+        def mockedMapper = mock(mapper)
+        mockedMapper.getOriginalFileSystemFile(fileName).returns(originalFile)
+
         play {
-             mapper.map (resource, config)
+            mockedMapper.map (resource, config)
             assertEquals 'file_less.css', resource.actualUrl
             assertEquals 'css', resource.sourceUrlExtension
             assertEquals 'stylesheet', resource.tagAttributes.rel
@@ -43,20 +48,24 @@ class LesscssResourceMapperTests extends GroovyTestCase{
 
     @Test
     void testMapperHandlesUpperCaseFileExtension() {
-
+        String fileName = "file.LESS"
         def targetFile = mock(File, constructor('/var/file/file_less.css'))
 
+        def originalFile = mock(File)
         def processedFile = mock(File)
-        processedFile.getName().returns('file.LESS').stub()
-        processedFile.getAbsolutePath().returns('/var/file/file.LESS').stub()
+        processedFile.getName().returns(fileName).stub()
+        processedFile.getAbsolutePath().returns('/var/file/'+fileName).stub()
 
         def lessEngine = mock(LessEngine, constructor())
-        lessEngine.compile(processedFile, targetFile).once()
+        lessEngine.compile(originalFile, targetFile).once()
 
-        def resource = [processedFile:processedFile, actualUrl:'', sourceUrlExtension:'LESS', contentType:'', originalUrl:'file.LESS', tagAttributes:[rel:'stylesheet/less']]
+        def mockedMapper = mock(mapper)
+        mockedMapper.getOriginalFileSystemFile(fileName).returns(originalFile)
+
+        def resource = [processedFile:processedFile, sourceUrl:fileName, actualUrl:'', sourceUrlExtension:'LESS', contentType:'', originalUrl:'file.LESS', tagAttributes:[rel:'stylesheet/less']]
         def config = [:]
         play {
-             mapper.map (resource, config)
+            mockedMapper.map (resource, config)
             assertEquals 'file_less.css', resource.actualUrl
             assertEquals 'css', resource.sourceUrlExtension
             assertEquals 'stylesheet', resource.tagAttributes.rel
@@ -86,7 +95,7 @@ class LesscssResourceMapperTests extends GroovyTestCase{
         def lessEngine = mock(LessEngine)
         def processedFile = mock(File)
         processedFile.getName().returns('notless.css')
-        def resource = [processedFile:processedFile, actualUrl:'notless.css', sourceUrlExtension:'css', contentType:'', originalUrl:'notless.css', tagAttributes:[rel:'stylesheet']]
+        def resource = [processedFile:processedFile, sourceUrl:'notless.css', actualUrl:'notless.css', sourceUrlExtension:'css', contentType:'', originalUrl:'notless.css', tagAttributes:[rel:'stylesheet']]
         def config = [:]
         play {
              mapper.map (resource, config)

@@ -8,6 +8,8 @@
     </head>
     <body>
         <h1>Less Test</h1>
+        <h2>Imported Color</h2>
+        <h3>Another imported Color</h3>
         <r:layoutResources/>
 
     </body>

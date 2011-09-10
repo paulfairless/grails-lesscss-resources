@@ -7,6 +7,8 @@ import org.grails.plugin.resource.mapper.MapperPhase
  *
  * Mapping file to compile .less files into .css files
  */
+import org.codehaus.groovy.grails.commons.ApplicationHolder as AH
+import org.codehaus.groovy.grails.commons.GrailsResourceUtils
 
 class LesscssResourceMapper {
     def phase = MapperPhase.GENERATION // need to run early so that we don't miss out on all the good stuff
@@ -18,16 +20,16 @@ class LesscssResourceMapper {
         File originalFile = resource.processedFile
         File target
 
-        if (originalFile.name.toLowerCase().endsWith(LESS_FILE_EXTENSION)) {
+        if (resource.sourceUrl && originalFile.name.toLowerCase().endsWith(LESS_FILE_EXTENSION)) {
             LessEngine engine = new LessEngine()
-            File input = originalFile
+            File input = getOriginalFileSystemFile(resource.sourceUrl);
             target = new File(generateCompiledFileFromOriginal(originalFile.absolutePath))
 
             if (log.debugEnabled) {
                 log.debug "Compiling LESS file [${originalFile}] into [${target}]"
             }
             try {
-                engine.compile originalFile, target
+                engine.compile input, target
                 // Update mapping entry
                 // We need to reference the new css file from now on
                 resource.processedFile = target
@@ -45,5 +47,9 @@ class LesscssResourceMapper {
 
     private String generateCompiledFileFromOriginal(String original) {
          original.replaceAll(/(?i)\.less/, '_less.css')
+    }
+
+    private File getOriginalFileSystemFile(String sourcePath) {
+        new File(GrailsResourceUtils.WEB_APP_DIR + sourcePath);
     }
 }

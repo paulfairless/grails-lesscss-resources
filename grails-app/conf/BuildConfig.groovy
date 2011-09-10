@@ -33,7 +33,7 @@ grails.project.dependency.resolution = {
             export = false
         }
 
-        test("org.seleniumhq.selenium:selenium-firefox-driver:2.3.1") {
+        test("org.seleniumhq.selenium:selenium-firefox-driver:2.5.0") {
             exclude 'selenium-server'
             export = false
         }

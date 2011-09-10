@@ -1,7 +1,17 @@
+@import "test_import.less";
+@import "test_import2.less";
+
 @red:        #842210;
 @blue:       #2222FB;
 @green:      #22FB22;
 
 h1 {
   color: @blue;
+}
+
+h2 {
+  color: @imported_color;
+}
+h3 {
+  color: @imported_color2;
 }
