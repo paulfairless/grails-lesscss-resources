@@ -1,5 +1,5 @@
 #less CSS Resource plugin#
-This plugin is designed to optimise the use of <a href="http://www.lesscss.org">.less</a> css files. The Processing will compile specified .less files into their .css counterprt, and place the css into the processing chain to be available to the other resource plugin features. The plugin uses the <a href="http://www.asual.com/lesscss/">Asual Less Engine</a> to compile the .less files using Mozilla Rhino. The plugin uses the <a href="http://www.grails.org/plugin/resources">Resources plugin</a> and plays nicely with both the zipped and cached resources plugins.
+This plugin is designed to optimize the use of <a href="http://www.lesscss.org">.less</a> css files. The processing will compile specified .less files into their .css counterparts, and place the css into the processing chain to be available to the other resource plugin features. The plugin uses the <a href="http://www.asual.com/lesscss/">Asual Less Engine</a> to compile the .less files using Mozilla Rhino. The plugin uses the <a href="http://www.grails.org/plugin/resources">Resources plugin</a> and plays nicely with both the zipped and cached resources plugins.
 
 LESS extends CSS with dynamic behavior such as variables, mixins, operations and functions. <a href="http://www.lesscss.org">Read more</a>
 
@@ -20,7 +20,7 @@ An Example of using both .less and .css files together in a bundle
 LESS supports importing of other less/css files. This is supported in lesscss-resources
 <pre><code>@import 'imported_style.less';
 </code></pre>
-It is notable that the files to be imported are not part of the resources bundle, so any changes will not trigger a rebuild of the resource.
+Note that the files to be imported are not part of the resources bundle, so any changes will not trigger a rebuild of the resource.
 
 ###Required Settings for LESS###
 <ul>

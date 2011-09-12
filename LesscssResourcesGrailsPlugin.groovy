@@ -16,7 +16,7 @@ class LesscssResourcesGrailsPlugin {
     def authorEmail = ""
     def title = "Less CSS Resources"
     def description = '''\\
-This plugin if to support server-side compliation of .less CSS files to their .css counterparts.
+This plugin supports server-side compilation of .less CSS files to their .css counterparts.
 '''
 
     // URL to the plugin's documentation
