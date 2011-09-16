@@ -2,6 +2,7 @@ import com.asual.lesscss.LessEngine
 import com.asual.lesscss.LessException
 import org.grails.plugin.resource.mapper.MapperPhase
 import org.codehaus.groovy.grails.plugins.GrailsPluginUtils
+import grails.util.PluginBuildSettings
 
 /**
  * @author Paul Fairless
@@ -57,8 +58,15 @@ class LesscssResourceMapper {
     private File getOriginalFileSystemFile(String sourcePath) {
         def resourceFile
         if(isPlugin(sourcePath)){
-            def pluginName = getPluginFullName(sourcePath)
-            def resourcePath = getResourceRelativePath(pluginName, sourcePath)
+            def pluginFullName = getPluginFullName(sourcePath)
+            def resourcePath = getResourceRelativePath(pluginFullName, sourcePath)
+
+            def ourPluginInfo = GrailsPluginUtils.getPluginInfos().find{pluginInfo -> pluginFullName.contains(pluginInfo.name)}
+            resourceFile = new File(ourPluginInfo.pluginDir.path + '/' + GrailsResourceUtils.WEB_APP_DIR + '/' + resourcePath)
+
+            if(resourceFile.exists()){
+                return resourceFile
+            }
 
             for(directory in GrailsPluginUtils.getPluginBaseDirectories()){
                 resourceFile = new File(directory + '/' + pluginName + '/' + GrailsResourceUtils.WEB_APP_DIR + '/' + resourcePath)
