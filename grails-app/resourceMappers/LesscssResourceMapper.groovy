@@ -67,13 +67,6 @@ class LesscssResourceMapper {
             if(resourceFile.exists()){
                 return resourceFile
             }
-
-            for(directory in GrailsPluginUtils.getPluginBaseDirectories()){
-                resourceFile = new File(directory + '/' + pluginName + '/' + GrailsResourceUtils.WEB_APP_DIR + '/' + resourcePath)
-                if(resourceFile.exists()){
-                    return resourceFile
-                }
-            }
         }
 
         return new File(GrailsResourceUtils.WEB_APP_DIR + sourcePath)
