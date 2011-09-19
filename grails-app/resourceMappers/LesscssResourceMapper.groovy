@@ -7,10 +7,12 @@ import org.grails.plugin.resource.mapper.MapperPhase
  *
  * Mapping file to compile .less files into .css files
  */
-import org.codehaus.groovy.grails.commons.ApplicationHolder as AH
-import org.codehaus.groovy.grails.commons.GrailsResourceUtils
+import org.codehaus.groovy.grails.plugins.support.aware.GrailsApplicationAware
 
-class LesscssResourceMapper {
+class LesscssResourceMapper implements GrailsApplicationAware {
+
+    GrailsApplication grailsApplication
+
     def phase = MapperPhase.GENERATION // need to run early so that we don't miss out on all the good stuff
 
     static defaultExcludes = ['**/*.js','**/*.png','**/*.gif','**/*.jpg','**/*.jpeg','**/*.gz','**/*.zip']
@@ -50,6 +52,6 @@ class LesscssResourceMapper {
     }
 
     private File getOriginalFileSystemFile(String sourcePath) {
-        new File(GrailsResourceUtils.WEB_APP_DIR + sourcePath);
+        grailsApplication.parentContext.getResource(sourcePath).file
     }
 }
