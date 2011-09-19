@@ -8,6 +8,7 @@ import org.grails.plugin.resource.mapper.MapperPhase
  * Mapping file to compile .less files into .css files
  */
 import org.codehaus.groovy.grails.plugins.support.aware.GrailsApplicationAware
+import org.codehaus.groovy.grails.commons.GrailsApplication
 
 class LesscssResourceMapper implements GrailsApplicationAware {
 
