@@ -7,16 +7,17 @@ import org.grails.plugin.resource.mapper.MapperPhase
  *
  * Mapping file to compile .less files into .css files
  */
-import org.codehaus.groovy.grails.plugins.support.aware.GrailsApplicationAware
-import org.codehaus.groovy.grails.commons.GrailsApplication
 
-class LesscssResourceMapper implements GrailsApplicationAware {
+class LesscssResourceMapper {
 
-    GrailsApplication grailsApplication
+    def grailsApplication
+    def resourceService
 
     def phase = MapperPhase.GENERATION // need to run early so that we don't miss out on all the good stuff
+    def operation = "compile"
 
     static defaultExcludes = ['**/*.js','**/*.png','**/*.gif','**/*.jpg','**/*.jpeg','**/*.gz','**/*.zip']
+    static defaultIncludes = ['**/*.less']                                                                                                    
     static String LESS_FILE_EXTENSION = '.less'
 
     def map(resource, config){
@@ -25,34 +26,48 @@ class LesscssResourceMapper implements GrailsApplicationAware {
 
         if (resource.sourceUrl && originalFile.name.toLowerCase().endsWith(LESS_FILE_EXTENSION)) {
             LessEngine engine = new LessEngine()
-            File input = getOriginalFileSystemFile(resource.sourceUrl);
+            URL input = getOriginalResourceURLForURI(resource.sourceUrl)
             target = new File(generateCompiledFileFromOriginal(originalFile.absolutePath))
+
+            // save current context classloader and set the classloader from the 
+            // Grails application, otherwise we have trouble accessing the original 
+            // resources when reloading 
+            def thread = Thread.currentThread()
+            def saveCL = thread.contextClassLoader
+            thread.contextClassLoader = grailsApplication.classLoader
 
             if (log.debugEnabled) {
                 log.debug "Compiling LESS file [${originalFile}] into [${target}]"
             }
             try {
-                engine.compile input, target
+                target.text = engine.compile(input)
+                
                 // Update mapping entry
                 // We need to reference the new css file from now on
                 resource.processedFile = target
-                // Not sure if i really need these
+                resource.updateActualUrlFromProcessedFile()
+                
+                // Change the source extension so the compiled CSS gets into the
+                // .css bundle, not a separate .less bundle
                 resource.sourceUrlExtension = 'css'
-                resource.actualUrl = generateCompiledFileFromOriginal(resource.originalUrl)
-                resource.contentType = 'text/css'
+                // fixup the rel attribute
                 resource.tagAttributes.rel = 'stylesheet'
+
             } catch (LessException e) {
                 log.error("error compiling less file: ${originalFile}")
                 e.printStackTrace()
+            } finally {
+                // restore saved classloader
+                thread.contextClassLoader = saveCL
             }
         }
     }
 
     private String generateCompiledFileFromOriginal(String original) {
-         original.replaceAll(/(?i)\.less/, '_less.css')
+        original.replaceAll(/(?i)\.less/, '_less.css')
     }
 
-    private File getOriginalFileSystemFile(String sourcePath) {
-        grailsApplication.parentContext.getResource(sourcePath).file
+    private URL getOriginalResourceURLForURI(String sourceUri) {
+        resourceService.getOriginalResourceURLForURI(sourceUri);
     }
 }
