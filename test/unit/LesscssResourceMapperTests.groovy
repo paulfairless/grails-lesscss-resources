@@ -40,6 +40,7 @@ class LesscssResourceMapperTests extends GroovyTestCase{
         play {
             mockedMapper.map (resource, config)
             assertEquals 'file_less.css', resource.actualUrl
+            assertEquals 'file_less.css', resource.sourceUrl
             assertEquals 'css', resource.sourceUrlExtension
             assertEquals 'stylesheet', resource.tagAttributes.rel
             assertEquals 'text/css', resource.contentType
@@ -67,6 +68,7 @@ class LesscssResourceMapperTests extends GroovyTestCase{
         play {
             mockedMapper.map (resource, config)
             assertEquals 'file_less.css', resource.actualUrl
+            assertEquals 'file_less.css', resource.sourceUrl
             assertEquals 'css', resource.sourceUrlExtension
             assertEquals 'stylesheet', resource.tagAttributes.rel
             assertEquals 'text/css', resource.contentType
@@ -80,14 +82,8 @@ class LesscssResourceMapperTests extends GroovyTestCase{
     }
 
     @Test
-    void testMapperExcludesAllButCSS(){
-       assertTrue(mapper.defaultExcludes.contains('**/*.js'))
-       assertTrue(mapper.defaultExcludes.contains('**/*.png'))
-       assertTrue(mapper.defaultExcludes.contains('**/*.gif'))
-       assertTrue(mapper.defaultExcludes.contains('**/*.jpg'))
-       assertTrue(mapper.defaultExcludes.contains('**/*.jpeg'))
-       assertTrue(mapper.defaultExcludes.contains('**/*.gz'))
-       assertTrue(mapper.defaultExcludes.contains('**/*.zip'))
+    void testMapperIncludesLessCSS(){
+       assertTrue(mapper.defaultIncludes.contains('**/*.less'))
     }
 
     @Test
@@ -100,6 +96,7 @@ class LesscssResourceMapperTests extends GroovyTestCase{
         play {
              mapper.map (resource, config)
             assertEquals 'notless.css', resource.actualUrl
+            assertEquals 'notless.css', resource.sourceUrl
             assertEquals 'css', resource.sourceUrlExtension
             assertEquals 'stylesheet', resource.tagAttributes.rel
             assertEquals '', resource.contentType

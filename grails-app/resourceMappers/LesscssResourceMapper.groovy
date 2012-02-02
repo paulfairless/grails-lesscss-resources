@@ -16,7 +16,7 @@ class LesscssResourceMapper implements GrailsApplicationAware {
 
     def phase = MapperPhase.GENERATION // need to run early so that we don't miss out on all the good stuff
 
-    static defaultExcludes = ['**/*.js','**/*.png','**/*.gif','**/*.jpg','**/*.jpeg','**/*.gz','**/*.zip']
+    static defaultIncludes = ['**/*.less']
     static String LESS_FILE_EXTENSION = '.less'
 
     def map(resource, config){
@@ -39,6 +39,7 @@ class LesscssResourceMapper implements GrailsApplicationAware {
                 // Not sure if i really need these
                 resource.sourceUrlExtension = 'css'
                 resource.actualUrl = generateCompiledFileFromOriginal(resource.originalUrl)
+                resource.sourceUrl = resource.actualUrl
                 resource.contentType = 'text/css'
                 resource.tagAttributes.rel = 'stylesheet'
             } catch (LessException e) {
