@@ -39,7 +39,6 @@ class LesscssResourceMapper implements GrailsApplicationAware {
                 // Not sure if i really need these
                 resource.sourceUrlExtension = 'css'
                 resource.actualUrl = generateCompiledFileFromOriginal(resource.originalUrl)
-                resource.sourceUrl = resource.actualUrl
                 resource.contentType = 'text/css'
                 resource.tagAttributes.rel = 'stylesheet'
             } catch (LessException e) {

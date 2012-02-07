@@ -40,7 +40,7 @@ class LesscssResourceMapperTests extends GroovyTestCase{
         play {
             mockedMapper.map (resource, config)
             assertEquals 'file_less.css', resource.actualUrl
-            assertEquals 'file_less.css', resource.sourceUrl
+            assertEquals 'file.less', resource.sourceUrl
             assertEquals 'css', resource.sourceUrlExtension
             assertEquals 'stylesheet', resource.tagAttributes.rel
             assertEquals 'text/css', resource.contentType
@@ -68,7 +68,7 @@ class LesscssResourceMapperTests extends GroovyTestCase{
         play {
             mockedMapper.map (resource, config)
             assertEquals 'file_less.css', resource.actualUrl
-            assertEquals 'file_less.css', resource.sourceUrl
+            assertEquals 'file.LESS', resource.sourceUrl
             assertEquals 'css', resource.sourceUrlExtension
             assertEquals 'stylesheet', resource.tagAttributes.rel
             assertEquals 'text/css', resource.contentType

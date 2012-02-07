@@ -16,5 +16,8 @@ class LesscssBundleSpec extends GebSpec {
         $('h1').jquery.css('color') == 'rgb(34, 34, 251)'
         $('h2').jquery.css('color') == 'rgb(132, 34, 16)'
         $('h3').jquery.css('color') == 'rgb(34, 251, 34)'
+
+        and:'css processor still runs'
+        $('h3').jquery.css('background-url') == 'images/header-pattern.png'
     }
 }
