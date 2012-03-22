@@ -42,8 +42,7 @@ class LesscssResourceMapper implements GrailsApplicationAware {
                 resource.contentType = 'text/css'
                 resource.tagAttributes.rel = 'stylesheet'
             } catch (LessException e) {
-                log.error("error compiling less file: ${originalFile}")
-                e.printStackTrace()
+                log.error("error compiling less file: ${originalFile}", e)
             }
         }
     }
