@@ -16,7 +16,7 @@ class LesscssResourceMapperTests extends GroovyTestCase{
     def lessCompiler
     void setUp() {
         lessCompiler =  mock(LessCompiler, constructor())
-        mapper = new LesscssResourceMapper(lessCompiler: lessCompiler)
+        mapper = new LesscssResourceMapper()
         mapper.metaClass.log = [debug:{}, error:{}]
     }
 
