@@ -17,9 +17,9 @@ class LesscssResourceMapper implements GrailsApplicationAware {
     def phase = MapperPhase.GENERATION // need to run early so that we don't miss out on all the good stuff
 
     static defaultIncludes = ['**/*.less']
-    LessCompiler lessCompiler = new LessCompiler()
 
     def map(resource, config){
+        LessCompiler lessCompiler = new LessCompiler()
         File originalFile = resource.processedFile
         File input = getOriginalFileSystemFile(resource.sourceUrl);
         File target = new File(generateCompiledFileFromOriginal(originalFile.absolutePath))
