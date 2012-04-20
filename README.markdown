@@ -1,5 +1,5 @@
 #less CSS Resource plugin#
-This plugin is designed to optimize the use of <a href="http://www.lesscss.org">.less</a> css files. The processing will compile specified .less files into their .css counterparts, and place the css into the processing chain to be available to the other resource plugin features. The plugin uses the <a href="http://www.asual.com/lesscss/">Asual Less Engine</a> to compile the .less files using Mozilla Rhino. The plugin uses the <a href="http://www.grails.org/plugin/resources">Resources plugin</a> and plays nicely with both the zipped and cached resources plugins.
+This plugin is designed to optimize the use of <a href="http://www.lesscss.org">.less</a> css files. The processing will compile specified .less files into their .css counterparts, and place the css into the processing chain to be available to the other resource plugin features. The plugin uses the <a href="https://github.com/marceloverdijk/lesscss-java">Official LESS CSS Compiler for Java</a> to compile the .less files using Mozilla Rhino. The plugin uses the <a href="http://www.grails.org/plugin/resources">Resources plugin</a> and plays nicely with both the zipped and cached resources plugins.
 
 LESS extends CSS with dynamic behavior such as variables, mixins, operations and functions. <a href="http://www.lesscss.org">Read more</a>
 
@@ -40,4 +40,7 @@ See the <a href="http://www.grails.org/plugin/resources">Resources plugin</a> fo
 
 ##Special Thanks##
 To David Marquis for his grails-lesscss plugin, which was the inspiration  for this resources based version.
-The guys at <a href="http://www.asual.com/">Asual<a> who created the lesscss complier, with does all the heavy lifting.
+
+To <a href="https://github.com/marceloverdijk">Marcel Overdijk</a> who created the Official LESS CSS Compiler for Java, which does all the heavy lifting.
+
+The guys at <a href="http://www.asual.com/">Asual<a> who created the lesscss compiler which was used in earlier versions of this plugin.
