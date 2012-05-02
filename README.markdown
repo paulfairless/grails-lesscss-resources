@@ -33,7 +33,9 @@ Note that the files to be imported are not part of the resources bundle, so any 
 See the <a href="http://www.grails.org/plugin/resources">Resources plugin</a> for more details on available configurations
 ##Changelog##
 1.3.0 - Breaking Change - default bundle workaround is no longer required
+
 1.3.0 - Breaking Chnage - Asual LessCSS compiler has been replaced with <a href="https://github.com/marceloverdijk/lesscss-java">lesscss-java</a>
+
 ##Issues##
 <ul>
     <li>Must specify the default bundle manually as this is calculated based on file extension by default.</li>
