@@ -2,6 +2,7 @@ import org.gmock.WithGMock
 import org.junit.Test
 import grails.test.GrailsUnitTestCase
 import org.grails.plugin.resource.mapper.MapperPhase
+import org.grails.plugin.resource.ResourceMeta
 import org.lesscss.LessCompiler
 
 /**
@@ -10,10 +11,11 @@ import org.lesscss.LessCompiler
  */
 
 @WithGMock
-class LesscssResourceMapperTests extends GroovyTestCase{
+class LesscssResourceMapperTests extends GrailsUnitTestCase {
 
     LesscssResourceMapper mapper
     def lessCompiler
+
     void setUp() {
         lessCompiler =  mock(LessCompiler, constructor())
         mapper = new LesscssResourceMapper()
@@ -24,6 +26,7 @@ class LesscssResourceMapperTests extends GroovyTestCase{
     void testMapperGeneratesCssFromLessResource() {
         String fileName = "file.less"
         def targetFile = mock(File, constructor('/var/file/file_less.css'))
+        targetFile.exists().returns(true).stub()
 
         def originalFile = mock(File)
         def processedFile = mock(File)
@@ -32,18 +35,21 @@ class LesscssResourceMapperTests extends GroovyTestCase{
 
         lessCompiler.compile(originalFile, targetFile).once()
 
-        def resource = [processedFile:processedFile, sourceUrl:fileName, actualUrl:'', sourceUrlExtension:'less', contentType:'', originalUrl:'file.less', tagAttributes:[rel:'stylesheet/less']]
         def config = [:]
+        def resource = new ResourceMeta(contentType:'',  tagAttributes:[rel:'stylesheet/less'])
+        def resourceMock = mock(resource)
+        resourceMock.processedFile.returns(processedFile)
+        resourceMock.setProcessedFile(targetFile)
+        resourceMock.sourceUrl.returns(fileName)
+        resourceMock.updateActualUrlFromProcessedFile().once()
 
         def mockedMapper = mock(mapper)
         mockedMapper.getOriginalFileSystemFile(fileName).returns(originalFile)
 
         play {
             mapper = new LesscssResourceMapper()
-            mockedMapper.map (resource, config)
-            assertEquals 'file_less.css', resource.actualUrl
-            assertEquals 'file.less', resource.sourceUrl
-            assertEquals 'css', resource.sourceUrlExtension
+
+            mockedMapper.map (resourceMock, config)
             assertEquals 'stylesheet', resource.tagAttributes.rel
             assertEquals 'text/css', resource.contentType
         }

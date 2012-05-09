@@ -18,7 +18,7 @@ class LesscssResourceMapper implements GrailsApplicationAware {
 
     static defaultIncludes = ['**/*.less']
 
-    def map(resource, config){
+    def map(resource, config) {
         LessCompiler lessCompiler = new LessCompiler()
         File originalFile = resource.processedFile
         File input = getOriginalFileSystemFile(resource.sourceUrl);
@@ -34,9 +34,10 @@ class LesscssResourceMapper implements GrailsApplicationAware {
             resource.processedFile = target
             // Not sure if i really need these
             resource.sourceUrlExtension = 'css'
-            resource.actualUrl = generateCompiledFileFromOriginal(resource.originalUrl)
             resource.contentType = 'text/css'
-            resource.tagAttributes.rel = 'stylesheet'
+            resource.tagAttributes?.rel = 'stylesheet'
+            resource.updateActualUrlFromProcessedFile()
+
         } catch (LessException e) {
             log.error("error compiling less file: ${originalFile}", e)
         }

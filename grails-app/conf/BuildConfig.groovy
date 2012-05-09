@@ -1,6 +1,7 @@
 grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
+grails.release.scm.enabled = false
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies
@@ -22,20 +23,34 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
-        //mavenRepo "http://www.asual.com/maven/content/groups/public"
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
         runtime 'org.lesscss:lesscss:1.3.0'
-        test "org.codehaus.geb:geb-spock:0.6.0"
-        test ('org.gmock:gmock:0.8.0') {
+
+        test ("org.codehaus.geb:geb-spock:0.7.0") {
             export = false
         }
-
-        test("org.seleniumhq.selenium:selenium-firefox-driver:2.5.0") {
+        test ('org.gmock:gmock:0.8.2') {
+            export = false
+        }
+        test("org.seleniumhq.selenium:selenium-firefox-driver:2.21.0") {
             exclude 'selenium-server'
             export = false
         }
-        // runtime 'mysql:mysql-connector-java:5.1.13'
+    }
+    plugins {
+        test (":spock:0.6") {
+            export = false
+        }
+        test (":geb:0.7.0") {
+            export = false
+        }
+        compile (":resources:1.1.6") {
+            export = false
+        }
+//        compile (":release:2.0.0") {
+//            export = false
+//        }
     }
 }
