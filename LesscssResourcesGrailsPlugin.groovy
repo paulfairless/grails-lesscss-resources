@@ -1,6 +1,6 @@
 class LesscssResourcesGrailsPlugin {
     // the plugin version
-    def version = "1.3.0.1"
+    def version = "1.3.0.3"
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = "1.3.5 > *"
     // the other plugins this plugin depends on
@@ -10,7 +10,9 @@ class LesscssResourcesGrailsPlugin {
     def pluginExcludes = [
             "grails-app/views/*.gsp",
             "web-app/less/*",
-            "web-app/images/*"
+            "web-app/images/*",
+            "web-app/css/*",
+            "web-app/js/*"
     ]
 
     def author = "Paul Fairless"

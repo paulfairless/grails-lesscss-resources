@@ -19,6 +19,7 @@ grails.project.dependency.resolution = {
         // from public Maven repositories
         //mavenLocal()
         mavenCentral()
+        grailsRepo "http://grails.org/plugins"
         //mavenRepo "http://snapshots.repository.codehaus.org"
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
@@ -47,6 +48,15 @@ grails.project.dependency.resolution = {
             export = false
         }
         compile (":resources:1.1.6") {
+            export = false
+        }
+        compile (":hibernate:2.0.0") {
+            export = false
+        }
+        compile (":rest-client-builder:1.0.2") {
+            export = false
+        }
+        compile (":tomcat:2.0.0") {
             export = false
         }
 //        compile (":release:2.0.0") {
