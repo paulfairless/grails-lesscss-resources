@@ -32,6 +32,14 @@ Note that the files to be imported are not part of the resources bundle, so any 
 
 
 See the <a href="http://www.grails.org/plugin/resources">Resources plugin</a> for more details on available configurations
+
+##Options##
+You can use the LessCSS engine to compress the output by adding this to your Config.groovy:
+
+    grails.lesscss.resources.compress = true
+
+By default the output is not compressed.
+
 ##Changelog##
 
 1.3.0 - Breaking Chnage - Asual LessCSS compiler has been replaced with <a href="https://github.com/marceloverdijk/lesscss-java">lesscss-java</a>
