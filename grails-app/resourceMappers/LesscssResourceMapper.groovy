@@ -20,6 +20,7 @@ class LesscssResourceMapper implements GrailsApplicationAware {
 
     def map(resource, config) {
         LessCompiler lessCompiler = new LessCompiler()
+        lessCompiler.compress = config?.compress ?: false
         File originalFile = resource.processedFile
         File input = getOriginalFileSystemFile(resource.sourceUrl);
         File target = new File(generateCompiledFileFromOriginal(originalFile.absolutePath))
