@@ -19,7 +19,7 @@ grails.project.dependency.resolution = {
         // from public Maven repositories
         //mavenLocal()
         mavenCentral()
-        grailsRepo "http://grails.org/plugins"
+        //grailsRepo "http://grails.org/plugins"
         //mavenRepo "http://snapshots.repository.codehaus.org"
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
@@ -35,7 +35,7 @@ grails.project.dependency.resolution = {
         test ('org.gmock:gmock:0.8.2') {
             export = false
         }
-        test("org.seleniumhq.selenium:selenium-firefox-driver:2.21.0") {
+        test("org.seleniumhq.selenium:selenium-firefox-driver:2.23.1") {
             exclude 'selenium-server'
             export = false
         }
@@ -50,17 +50,14 @@ grails.project.dependency.resolution = {
         compile (":resources:1.1.6") {
             export = false
         }
-        compile (":hibernate:2.0.0") {
+        compile (":hibernate:$grailsVersion") {
             export = false
         }
-        compile (":rest-client-builder:1.0.2") {
+        compile (":tomcat:$grailsVersion") {
             export = false
         }
-        compile (":tomcat:2.0.0") {
+        build (":release:latest.integration", ":rest-client-builder:latest.integration") {
             export = false
         }
-//        compile (":release:2.0.0") {
-//            export = false
-//        }
     }
 }
