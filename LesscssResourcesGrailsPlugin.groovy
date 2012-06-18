@@ -25,8 +25,8 @@ This plugin supports server-side compilation of .less CSS files to their .css co
     // URL to the plugin's documentation
     def documentation = "https://github.com/paulfairless/grails-lesscss-resources"
     def license = "APACHE"
-    def issueManagement = [ system: "github", url: "https://github.com/paulfairless/grails-lesscss-resource/issues" ]
-    def scm = [ url: "https://github.com/paulfairless/grails-lesscss-resource" ]
+    def issueManagement = [ system: "github", url: "https://github.com/paulfairless/grails-lesscss-resources/issues" ]
+    def scm = [ url: "https://github.com/paulfairless/grails-lesscss-resources" ]
 
     def doWithSpring = { ->
         org.grails.plugin.resource.CSSPreprocessorResourceMapper.defaultIncludes.add('**/*.less')
