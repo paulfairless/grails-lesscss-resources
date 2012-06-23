@@ -1,14 +1,12 @@
-import geb.spock.GebSpec
+import geb.spock.GebReportingSpec
+import spock.lang.Stepwise
+
 /**
  * @author Paul Fairless
- *
  */
-
-class LesscssBundleSpec extends GebSpec {
-    def setupSpec() {
-//        browser.getDriver().setJavascriptEnabled(true)
-    }
-    def "check lesscss rules rendered"(){
+@Stepwise
+class LesscssBundleSpec extends GebReportingSpec {
+    def "check less-css rules rendered"() {
         when:
         go('http://localhost:8080/lesscss-resources')
 
@@ -18,7 +16,7 @@ class LesscssBundleSpec extends GebSpec {
         $('h2').jquery.css('color') == 'rgb(132, 34, 16)'
         $('h3').jquery.css('color') == 'rgb(34, 251, 34)'
 
-        and:'css processor still runs'
-        $('h1').jquery.css('background-image') =~ '.*/static/images/header-pattern.png.*'
+        and: 'css processor still runs'
+        $('h1').jquery.css('margin-top') == '10px'
     }
 }
