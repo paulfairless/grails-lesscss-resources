@@ -13,19 +13,23 @@ import org.lesscss.LessException
 class LesscssResourceMapper implements GrailsApplicationAware {
 
     GrailsApplication grailsApplication
+    LessCompiler lessCompiler
 
     def phase = MapperPhase.GENERATION // need to run early so that we don't miss out on all the good stuff
 
     static defaultIncludes = ['**/*.less']
 
     def map(resource, config) {
-        LessCompiler lessCompiler = new LessCompiler()
+        if(!lessCompiler) {
+            lessCompiler = new LessCompiler()
+            lessCompiler.setCompress(grailsApplication.config.grails?.resources?.mappers?.lesscss?.compress == true ?: false)
+        }
         File originalFile = resource.processedFile
         File input = getOriginalFileSystemFile(resource.sourceUrl);
         File target = new File(generateCompiledFileFromOriginal(originalFile.absolutePath))
 
         if (log.debugEnabled) {
-            log.debug "Compiling LESS file [${originalFile}] into [${target}]"
+            log.debug "Compiling LESS file [${originalFile}] into [${target}], with compress [${grailsApplication.config.grails?.resources?.mappers?.lesscss?.compress}]"
         }
         try {
             lessCompiler.compile input, target
@@ -45,7 +49,7 @@ class LesscssResourceMapper implements GrailsApplicationAware {
     }
 
     private String generateCompiledFileFromOriginal(String original) {
-         original.replaceAll(/(?i)\.less/, '_less.css')
+         original + '.css'
     }
 
     private File getOriginalFileSystemFile(String sourcePath) {
