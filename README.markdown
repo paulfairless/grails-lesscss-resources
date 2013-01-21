@@ -17,7 +17,7 @@ An Example of using both .less and .css files together in a bundle
 </code></pre>
 
 ###Import###
-LESS supports importing of other less/css files. This is supported in lesscss-resources. The import directive must use *double quotes* for the LESS compiler
+LESS supports importing of other less/css files. This is supported in lesscss-resources. The import directive must use <b>double quotes</b> for the LESS compiler
 <pre><code>@import "imported_style.less";
 </code></pre>
 
@@ -25,7 +25,7 @@ Note that the files to be imported are not part of the resources bundle, so any 
 
 ###Options###
 You can use the LessCSS engine to compress the output by adding this to your Config.groovy:
-    grails.resources.mappers.lesscss.compress = true
+<pre><code>grails.resources.mappers.lesscss.compress = true</code></pre>
 
 By default the output is not compressed. Note: This compression offered by LESS is not as comprehensive as you might expect.
 
