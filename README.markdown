@@ -17,7 +17,7 @@ An Example of using both .less and .css files together in a bundle
 </code></pre>
 
 ###Import###
-LESS supports importing of other less/css files. This is supported in lesscss-resources. The import directive must use <b>double quotes</b> for the LESS compiler
+LESS supports importing of other less/css files. This is supported in lesscss-resources.
 <pre><code>@import "imported_style.less";
 </code></pre>
 
@@ -40,6 +40,11 @@ By default the output is not compressed. Note: This compression offered by LESS 
 
 See the <a href="http://www.grails.org/plugin/resources">Resources plugin</a> for more details on available configurations
 ##Changelog##
+1.3.3
+Updated version of less-compiler to 1.3.3
+Supports latest Twitter Bootstrap
+Single and Double quotes for import statements
+
 1.3.1
 Updated version of less-compiler to 1.3.1
 Memory optimisations now the less-compiler can be multi-threaded

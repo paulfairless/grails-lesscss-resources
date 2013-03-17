@@ -17,6 +17,6 @@ class LesscssBundleSpec extends GebReportingSpec {
         $('h3').jquery.css('color') == 'rgb(34, 251, 34)'
 
         and: 'css processor still runs'
-        $('h1').jquery.css('margin-top') == '10px'
+        $('h1').jquery.css('background-image') =~ '.*/static/images/header-pattern.png.*'
     }
 }

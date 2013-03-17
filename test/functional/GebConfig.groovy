@@ -1,6 +1,4 @@
-import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.firefox.FirefoxDriver
-import org.openqa.selenium.htmlunit.HtmlUnitDriver
 
 /**
  * This is the Geb configuration file.
@@ -10,23 +8,11 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver
  * @author: jarias
  */
 driver = {
-    def driver = new HtmlUnitDriver()
-    driver.javascriptEnabled = true
+    def driver = new FirefoxDriver()
     driver
 }
 
 environments {
 
-    // run as “grails -Dgeb.env=chrome test-app”
-    // See: http://code.google.com/p/selenium/wiki/ChromeDriver
-    chrome {
-        driver = { new ChromeDriver() }
-    }
-
-    // run as “grails -Dgeb.env=firefox test-app”
-    // See: http://code.google.com/p/selenium/wiki/FirefoxDriver
-    firefox {
-        driver = { new FirefoxDriver() }
-    }
 
 }
