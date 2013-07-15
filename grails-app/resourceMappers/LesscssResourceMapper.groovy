@@ -1,3 +1,4 @@
+import org.apache.commons.io.FileUtils
 import org.grails.plugin.resource.mapper.MapperPhase
 
 /**
@@ -25,7 +26,8 @@ class LesscssResourceMapper implements GrailsApplicationAware {
             lessCompiler.setCompress(grailsApplication.config.grails?.resources?.mappers?.lesscss?.compress == true ?: false)
         }
         File originalFile = resource.processedFile
-        File input = getOriginalFileSystemFile(resource.sourceUrl);
+        File input = new File("${getOriginalFileSystemFile(resource.sourceUrl).absolutePath}.temp.less");
+	    FileUtils.copyFile(originalFile, input)
         File target = new File(generateCompiledFileFromOriginal(originalFile.absolutePath))
 
         if (log.debugEnabled) {
@@ -44,6 +46,8 @@ class LesscssResourceMapper implements GrailsApplicationAware {
 
         } catch (LessException e) {
             log.error("error compiling less file: ${originalFile}", e)
+        } finally {
+	        input.delete()
         }
 
     }
