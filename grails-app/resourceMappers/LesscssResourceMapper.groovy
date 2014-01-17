@@ -26,6 +26,11 @@ class LesscssResourceMapper implements GrailsApplicationAware {
         }
         File originalFile = resource.processedFile
         File input = getOriginalFileSystemFile(resource.sourceUrl);
+        if (!input.exists()) {
+            log.info("Input file ${input.absolutePath} does not exist.")
+            return
+        }
+
         File target = new File(generateCompiledFileFromOriginal(originalFile.absolutePath))
 
         if (log.debugEnabled) {
