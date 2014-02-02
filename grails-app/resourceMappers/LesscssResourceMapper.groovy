@@ -44,6 +44,8 @@ class LesscssResourceMapper implements GrailsApplicationAware {
 
         } catch (LessException e) {
             log.error("error compiling less file: ${originalFile}", e)
+        } catch (Exception ex) {
+            log.error("error compiling less file: ${originalFile}", ex)
         }
 
     }
