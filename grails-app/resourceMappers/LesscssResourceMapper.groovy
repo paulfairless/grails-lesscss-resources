@@ -1,3 +1,4 @@
+
 import org.grails.plugin.resource.mapper.MapperPhase
 
 /**
@@ -9,6 +10,7 @@ import org.codehaus.groovy.grails.plugins.support.aware.GrailsApplicationAware
 import org.codehaus.groovy.grails.commons.GrailsApplication
 import org.lesscss.LessCompiler
 import org.lesscss.LessException
+import org.grails.plugin.resource.AggregatedResourceMeta
 
 class LesscssResourceMapper implements GrailsApplicationAware {
 
@@ -20,30 +22,31 @@ class LesscssResourceMapper implements GrailsApplicationAware {
     static defaultIncludes = ['**/*.less']
 
     def map(resource, config) {
+
+        //do want to try and do anything to a bundled resource
+        if (resource instanceof AggregatedResourceMeta){
+            return
+        }
+
         if(!lessCompiler) {
             lessCompiler = new LessCompiler()
             lessCompiler.setCompress(grailsApplication.config.grails?.resources?.mappers?.lesscss?.compress == true ?: false)
         }
         File originalFile = resource.processedFile
-        File input = getOriginalFileSystemFile(resource.sourceUrl);
-        File target = new File(generateCompiledFileFromOriginal(originalFile.absolutePath))
+        File lessFile = getOriginalFileSystemFile(resource.sourceUrl);
+        File cssFile = new File(generateCompiledFileFromOriginal(originalFile.absolutePath))
 
-        if (log.debugEnabled) {
-            log.debug "Compiling LESS file [${originalFile}] into [${target}], with compress [${grailsApplication.config.grails?.resources?.mappers?.lesscss?.compress}]"
-        }
         try {
-            lessCompiler.compile input, target
-            // Update mapping entry
-            // We need to reference the new css file from now on
-            resource.processedFile = target
-            // Not sure if i really need these
-            resource.sourceUrlExtension = 'css'
-            resource.contentType = 'text/css'
-            resource.tagAttributes?.rel = 'stylesheet'
-            resource.updateActualUrlFromProcessedFile()
+            log.debug "Compiling LESS file [${lessFile}] into [${cssFile}]"
+            lessCompiler.compile (lessFile, cssFile)
 
-        } catch (LessException e) {
-            log.error("error compiling less file: ${originalFile}", e)
+            resource.processedFile = cssFile
+            resource.contentType = 'text/css'
+            resource.sourceUrlExtension = 'css'
+            resource.tagAttributes.rel = 'stylesheet'
+            resource.updateActualUrlFromProcessedFile()
+        } catch (Exception e) {
+            log.error("Error compiling less file: ${lessFile}", e)
         }
 
     }

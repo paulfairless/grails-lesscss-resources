@@ -28,40 +28,36 @@ grails.project.dependency.resolution = {
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
-        runtime 'org.lesscss:lesscss:1.3.3'
+        runtime 'org.lesscss:lesscss:1.7.0.1.1'
 
-        test ("org.codehaus.geb:geb-spock:0.7.0") {
-            export = false
-        }
+        test ("org.gebish:geb-spock:0.9.3")
+
         test ('org.gmock:gmock:0.8.2') {
             export = false
         }
-        test("org.seleniumhq.selenium:selenium-firefox-driver:2.31.0") {
+        test("org.seleniumhq.selenium:selenium-chrome-driver:2.41.0") {
             exclude 'selenium-server'
             export = false
         }
+
     }
     plugins {
-        test (":spock:0.6") {
+        test (":geb:0.9.3") {
             export = false
         }
-        test (":geb:0.7.2") {
+        compile (":resources:1.2.8") {
             export = false
         }
-        compile (":resources:1.1.6") {
-            export = false
-        }
-        compile (":hibernate:2.0.0") {
+        compile (":hibernate:3.6.10.15") {
             export = false
         }
         compile (":rest-client-builder:1.0.2") {
             export = false
         }
-        compile (":tomcat:2.0.0") {
+        compile (":tomcat:7.0.52.1") {
             export = false
         }
-//        build(':release:2.0.4', ':rest-client-builder:1.0.2') {
-//           export = false
+//        build(':release:3.0.1') {
 //        }
     }
 }

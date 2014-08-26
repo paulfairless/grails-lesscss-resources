@@ -22,7 +22,7 @@ log4j = {
 
 grails.resources.modules = {
     less {
-        resource url: 'less/test.less'
+        resource url: 'less/test.less', attrs:[rel: "stylesheet/less", type:'css']
         resource url: 'less/test.css'
     }
 }

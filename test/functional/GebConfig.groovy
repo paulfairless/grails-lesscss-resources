@@ -1,4 +1,4 @@
-import org.openqa.selenium.firefox.FirefoxDriver
+import org.openqa.selenium.chrome.ChromeDriver
 
 /**
  * This is the Geb configuration file.
@@ -8,7 +8,7 @@ import org.openqa.selenium.firefox.FirefoxDriver
  * @author: jarias
  */
 driver = {
-    def driver = new FirefoxDriver()
+    def driver = new ChromeDriver()
     driver
 }
 
